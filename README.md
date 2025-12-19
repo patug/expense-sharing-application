@@ -45,7 +45,7 @@ backend/
 │ ├── expenses.js
 │ └── balances.js
 
-
+---
 
 ## 🗄️ Database Structure
 
@@ -92,7 +92,7 @@ CREATE TABLE balances (
 from_user → owes money
 
 to_user → is owed money
-
+---
 🔗 API Endpoints
 Users
 POST /users
@@ -112,10 +112,11 @@ GET /balances/simplified
 
 Settlement
 POST /settle
-
+---
 🧪 Sample API Tests (Postman)
 Base URL:
 http://localhost:5000
+---
 1️⃣ Create Users
 POST /users
 {
@@ -129,6 +130,7 @@ Response
 Repeat for:
 { "name": "Bob" }
 { "name": "Charlie" }
+---
 2️⃣ Create Group
 POST /groups
 {
@@ -140,6 +142,7 @@ Response
   "id": 1,
   "name": "Trip to Goa"
 }
+---
 3️⃣ Add Expense – Equal Split
 Scenario:
 Alice paid ₹300, split equally among Alice, Bob, and Charlie.
@@ -160,6 +163,7 @@ Response
 {
   "message": "Expense added successfully"
 }
+---
 4️⃣ Add Expense – Exact Split
 Scenario:
 Bob paid ₹300
@@ -175,6 +179,7 @@ Alice ₹100, Bob ₹150, Charlie ₹50
     { "userId": 3, "amount": 50 }
   ]
 }
+---
 5️⃣ Add Expense – Percentage Split
 Scenario:
 Charlie paid ₹500
@@ -190,6 +195,7 @@ Alice 40%, Bob 30%, Charlie 30%
     { "userId": 3, "percent": 30 }
   ]
 }
+---
 6️⃣ View User Balance
 GET /balances/1
 
@@ -203,6 +209,7 @@ Copy code
     { "from_user": 3, "amount": "200" }
   ]
 }
+---
 7️⃣ View Simplified Balances (Core Requirement)
 GET /balances/simplified
 [
@@ -210,7 +217,7 @@ GET /balances/simplified
   { "from": 3, "to": 1, "amount": 50 }
 ]
 This shows net balances with minimum transactions, avoiding chained debts.
-
+---
 8️⃣ Settle Dues
 POST /settle
 {
